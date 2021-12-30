@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <script src="./../src/assets/js/api.js"></script>
+</head>
+
+<body>
+  <script type="text/javascript">
+    apiready = function () {
+      window.api.openWin({
+        name: 'win', //描述：window名字
+        url: './index.html', //描述：页面地址，可以为本地文件路径，支持相对路径和绝对路径，以及 widget://、fs://等协议路径，也可以为远程地址。 当data参数不为空时，url将做为baseUrl，data中的html引用的资源文件根路径以该url为基础。
+        data: "", //（可选项）页面加载的数据内容，可以为html片段或者整张html文件的数据
+        headers: "", //（可选项）请求头
+        useWKWebView: true, //（可选项）是否使用WKWebView来加载页面。WKWebView具有Safari相同的JavaScript引擎，支持更多的HTML5特性，相比于UIWebView，在性能和功能方面都有很大提升。只支持iOS8.0及以上系统。注意openWin时使用WKWebView可能会影响window的页面切换效果，建议在openFrame时使用。
+        historyGestureEnabled: true, //（可选项）是否可以通过手势来进行历史记录前进后退，只在useWKWebView参数为true时有效。
+        // pageParam: pageParam, //（可选项）页面参数，新页面中可以通过 api.pageParam 获取
+        bounces: false, //（可选项）页面是否弹动
+        bgColor: '#fff', //（可选项）背景色，支持图片和颜色，格式为 #fff、#ffffff、rgba(r,g,b,a)等，图片路径支持 fs://、widget://等 APICloud 自定义文件路径协议，同时支持相对路径
+        scrollToTop: true, //（可选项）当点击状态栏，页面是否滚动到顶部。若当前屏幕上不止一个页面的 scrollToTop 属性为 true，则所有的都不会起作用。只 iOS 有效
+        scrollEnabled: true, //（可选项） 页面内容超出后是否可以滚动， 只支持iOS
+        vScrollBarEnabled: true, //（可选项）是否显示垂直滚动条
+        hScrollBarEnabled: true, //（可选项）是否显示水平滚动条
+        scaleEnabled: false, //（可选项）页面是否可以缩放
+        slidBackEnabled: true, //（可选项）是否支持滑动返回。iOS7.0及以上系统中，在新打开的页面中向右滑动，可以返回到上一个页面，该字段只 iOS 有效
+        slidBackType: "full",
+        allowEdit: true, //（可选项）是否允许长按页面时弹出选择菜单
+      })
+
+      // 安卓返回键监听 安卓注册双击返回键退出程序事件
+      // if (window.api.systemType == "android") {
+      //   window.api.addEventListener(
+      //     {
+      //       name: "keyback"
+      //     },
+      //     // eslint-disable-next-line no-unused-vars
+      //     ret => {
+      //       console.log(window.location.hash);
+      //       console.log('hash   ' + window.location.hash);
+      //       window.history.back()
+      //     }
+      //   );
+      // }
+    }
+  </script>
+</body>
+
+</html>

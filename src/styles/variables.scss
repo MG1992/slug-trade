@@ -1,0 +1,13 @@
+$themeColor: #EDB259;
+$themeColorBG: #005bd6;
+$borderGray: #f4f4f4;
+$appStatusTop: 25px;
+.theme-text {
+  color: $themeColor !important;
+}
+
+@mixin flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

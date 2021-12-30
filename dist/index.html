@@ -1,0 +1,98 @@
+<!DOCTYPE html><html lang=en><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0;viewport-fit=auto"><link rel=icon href=favicon.ico><title>mobile_demo</title><script src=./../src/assets/js/api.js></script><link href=css/chunk-02983fba.5903b111.css rel=prefetch><link href=css/chunk-083a134c.463d091a.css rel=prefetch><link href=css/chunk-1289ee65.8bf1e790.css rel=prefetch><link href=css/chunk-1484cdde.5482389d.css rel=prefetch><link href=css/chunk-1e01348d.a15235e1.css rel=prefetch><link href=css/chunk-25f47075.d32b1c08.css rel=prefetch><link href=css/chunk-2935693e.e918f179.css rel=prefetch><link href=css/chunk-38b07fde.4e72ece4.css rel=prefetch><link href=css/chunk-3af90368.5720b103.css rel=prefetch><link href=css/chunk-43161646.4793123e.css rel=prefetch><link href=css/chunk-65fc35d8.8bebd1b1.css rel=prefetch><link href=css/chunk-6c2c45b1.42b3b6fc.css rel=prefetch><link href=css/chunk-7569e15e.cab3fa21.css rel=prefetch><link href=css/chunk-795e8dd8.bbb2dbbf.css rel=prefetch><link href=css/chunk-9d11d73c.de7d4376.css rel=prefetch><link href=css/chunk-eb9ef5ae.44e1b1c0.css rel=prefetch><link href=css/group-deposit.acf1cf15.css rel=prefetch><link href=css/group-depositRecords.645fc39c.css rel=prefetch><link href=css/group-depositRecords_group-home_group-mine_group-withdrawsRecords.c2b80fa7.css rel=prefetch><link href=css/group-deposit_group-gathering.56054471.css rel=prefetch><link href=css/group-gathering.b0edc04b.css rel=prefetch><link href=css/group-home.4075ad4a.css rel=prefetch><link href=css/group-home_group-mine_group-transferAccounts_group-user_group-wallet.a1db6c58.css rel=prefetch><link href=css/group-mine.e1b6aeec.css rel=prefetch><link href=css/group-transferAccounts.2fc6e430.css rel=prefetch><link href=css/group-user.1bb0d98f.css rel=prefetch><link href=css/group-wallet.60754360.css rel=prefetch><link href=css/group-withdrawsRecords.4372cb27.css rel=prefetch><link href=js/chunk-02983fba.fa76b709.js rel=prefetch><link href=js/chunk-083a134c.ad5a91a1.js rel=prefetch><link href=js/chunk-1289ee65.b2c4fd57.js rel=prefetch><link href=js/chunk-1484cdde.763be5e8.js rel=prefetch><link href=js/chunk-1e01348d.2fe0392f.js rel=prefetch><link href=js/chunk-253e05fa.3d457554.js rel=prefetch><link href=js/chunk-25f47075.314cad48.js rel=prefetch><link href=js/chunk-2935693e.a85d589f.js rel=prefetch><link href=js/chunk-38b07fde.3c12ec18.js rel=prefetch><link href=js/chunk-3af90368.5295bed4.js rel=prefetch><link href=js/chunk-43161646.9750e95b.js rel=prefetch><link href=js/chunk-65fc35d8.dfd7b766.js rel=prefetch><link href=js/chunk-6c2c45b1.6616529e.js rel=prefetch><link href=js/chunk-7569e15e.2b8ade5f.js rel=prefetch><link href=js/chunk-795e8dd8.1a6cb347.js rel=prefetch><link href=js/chunk-9d11d73c.39de6677.js rel=prefetch><link href=js/chunk-eb9ef5ae.a90b4043.js rel=prefetch><link href=js/group-deposit.4c9434c9.js rel=prefetch><link href=js/group-depositRecords.c41f31ee.js rel=prefetch><link href=js/group-depositRecords_group-home_group-mine_group-withdrawsRecords.24c25532.js rel=prefetch><link href=js/group-deposit_group-gathering.cca7fd9d.js rel=prefetch><link href=js/group-gathering.eb98c0c7.js rel=prefetch><link href=js/group-home.c9f73cf6.js rel=prefetch><link href=js/group-home_group-mine_group-transferAccounts_group-user_group-wallet.b0f1f92f.js rel=prefetch><link href=js/group-mine.dbe3cea6.js rel=prefetch><link href=js/group-transferAccounts.92b07193.js rel=prefetch><link href=js/group-user.6dbec83a.js rel=prefetch><link href=js/group-wallet.39c3781e.js rel=prefetch><link href=js/group-withdrawsRecords.df17cbc6.js rel=prefetch><link href=css/app.978d1fbe.css rel=preload as=style><link href=css/chunk-vendors.9fc820b4.css rel=preload as=style><link href=js/app.7bebb82b.js rel=preload as=script><link href=js/chunk-vendors.df553389.js rel=preload as=script><link href=css/chunk-vendors.9fc820b4.css rel=stylesheet><link href=css/app.978d1fbe.css rel=stylesheet></head><script>!(function (a, b) {
+    function c() {
+      var b = f.getBoundingClientRect().width;
+      b / i > 540 && (b = 540 * i);
+      var c = b / 10;
+      (f.style.fontSize = c + "px"), (k.rem = a.rem = c);
+    }
+    var d,
+      e = a.document,
+      f = e.documentElement,
+      g = e.querySelector('meta[name="viewport"]'),
+      h = e.querySelector('meta[name="flexible"]'),
+      i = 0,
+      j = 0,
+      k = b.flexible || (b.flexible = {});
+    if (g) {
+      console.warn("将根据已有的meta标签来设置缩放比例");
+      var l = g.getAttribute("content").match(/initial\-scale=([\d\.]+)/);
+      l && ((j = parseFloat(l[1])), (i = parseInt(1 / j)));
+    } else if (h) {
+      var m = h.getAttribute("content");
+      if (m) {
+        var n = m.match(/initial\-dpr=([\d\.]+)/),
+          o = m.match(/maximum\-dpr=([\d\.]+)/);
+        n && ((i = parseFloat(n[1])), (j = parseFloat((1 / i).toFixed(2)))),
+          o && ((i = parseFloat(o[1])), (j = parseFloat((1 / i).toFixed(2))));
+      }
+    }
+    if (!i && !j) {
+      var p =
+        (a.navigator.appVersion.match(/android/gi),
+          a.navigator.appVersion.match(/iphone/gi)),
+        q = a.devicePixelRatio;
+      (i = p
+        ? q >= 3 && (!i || i >= 3)
+          ? 3
+          : q >= 2 && (!i || i >= 2)
+            ? 2
+            : 1
+        : 1),
+        (j = 1 / i);
+    }
+    if ((f.setAttribute("data-dpr", i), !g))
+      if (
+        ((g = e.createElement("meta")),
+          g.setAttribute("name", "viewport"),
+          g.setAttribute(
+            "content",
+            "initial-scale=" +
+            j +
+            ", maximum-scale=" +
+            j +
+            ", minimum-scale=" +
+            j +
+            ", user-scalable=no"
+          ),
+          f.firstElementChild)
+      )
+        f.firstElementChild.appendChild(g);
+      else {
+        var r = e.createElement("div");
+        r.appendChild(g), e.write(r.innerHTML);
+      }
+    a.addEventListener(
+      "resize",
+      function () {
+        clearTimeout(d), (d = setTimeout(c, 300));
+      },
+      !1
+    ),
+      a.addEventListener(
+        "pageshow",
+        function (a) {
+          a.persisted && (clearTimeout(d), (d = setTimeout(c, 300)));
+        },
+        !1
+      ),
+      "complete" === e.readyState
+        ? (e.body.style.fontSize = 12 * i + "px")
+        : e.addEventListener(
+          "DOMContentLoaded",
+          function () {
+            e.body.style.fontSize = 12 * i + "px";
+          },
+          !1
+        ),
+      c(),
+      (k.dpr = a.dpr = i),
+      (k.refreshRem = c),
+      (k.rem2px = function (a) {
+        var b = parseFloat(a) * this.rem;
+        return "string" == typeof a && a.match(/rem$/) && (b += "px"), b;
+      }),
+      (k.px2rem = function (a) {
+        var b = parseFloat(a) / this.rem;
+        return "string" == typeof a && a.match(/px$/) && (b += "rem"), b;
+      });
+  })(window, window.lib || (window.lib = {}));</script><body><noscript><strong>We're sorry but mobile_demo doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript><div id=app></div><script src=./../src/utils/jquery.js></script><script src=./custom_scripts/chart_main/charting_library.min.js></script><script src=js/chunk-vendors.df553389.js></script><script src=js/app.7bebb82b.js></script></body></html>
