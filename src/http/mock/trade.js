@@ -11,25 +11,21 @@ Random.extend({
     return Random.float(min, max, 1, 2);
   }
 })
-const { ts, tick: { close = 0, open = 0, high = 0, low = 0, vol = 0 } } = res;
 
 Mock.mock('/trade/kline/list', 'get', {
   "msg": "成功",
   "status": 1,
   "data|60": [{
-    "id|+1": 1,
-    "ts": new Date().getTime(),
-    "tick": {
-      "close": "@random(0, 100)",
-      "open": "@random(0, 100)",
-      "high": "@random(50, 100)",
-      "low": "@random(0, 50)",
-      "vol": "@random(0, 100)",
-    },
+    "time": new Date().getTime(),
+    "close": "@random(0, 100)",
+    "open": "@random(0, 100)",
+    "high": "@random(50, 100)",
+    "low": "@random(0, 50)",
+    "volume": "@random(0, 100)",
   }]
 });
 
-Mock.mock('/trade/kline/list', 'get', {
+Mock.mock('/trade/kline/current', 'get', {
   "msg": "成功",
   "status": 1,
   "data|60": [{

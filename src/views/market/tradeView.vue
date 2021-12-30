@@ -21,7 +21,6 @@
 
 <script>
 import sTradingview from "@/components/sTradingview/sTradingview";
-
 export default {
   name: "tradeView",
   components: {

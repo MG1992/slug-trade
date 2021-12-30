@@ -1,5 +1,6 @@
 import pako from 'pako'
 import { find } from 'lodash';
+import { getKlineList } from "@/http/modules/trade";
 
 export const webSocketMixin = {
   data() {
@@ -9,7 +10,7 @@ export const webSocketMixin = {
       arrayData: []
     };
   },
-  created() {},
+  created() { },
   methods: {
     /**
      * 获取推送数据 （取一个值就好）
@@ -24,7 +25,7 @@ export const webSocketMixin = {
           try {
             self.websock.close();
             this.isWebsock = false;
-          } catch (e) {}
+          } catch (e) { }
           // 实例化socket
           self.websock = new WebSocket(self.wsUrl);
           // 监听socket连接
@@ -45,7 +46,7 @@ export const webSocketMixin = {
       }
       this.isWebsock = true;
       this.websockSend();
-      setTimeout(function() {
+      setTimeout(function () {
         self.websockHeartbeat();
       }, 1000);
     },
@@ -74,42 +75,48 @@ export const webSocketMixin = {
 
     //监听返回消息
     websockMessage(msg) {
-      const reader = new FileReader();
       const self = this;
-      reader.readAsArrayBuffer(msg.data, 'utf-8');
-      reader.onload = function() {
-        let ploydata = new Uint8Array(reader.result);
-        let res = JSON.parse(pako.inflate(ploydata, {to: 'string'}));
-        if (res && res.tick) {
-          const { ts, tick: { close = 0, open = 0, high = 0, low = 0, vol = 0 } } = res;
-          self.arrayData.push({
-            time: Number(ts),
-            close: Number(close),
-            open: Number(open),
-            high: Number(high),
-            low: Number(low),
-            volume: Number(vol),
-          });
+      let setInt = null;
+      getKlineList().then(res => {
+        self.arrayData = [...self.arrayData, ...res];
+        self.onLoadedCallback && self.onLoadedCallback(self.arrayData)
+      });
 
-          // TODO：容错重复调用删除了
-          self.onLoadedCallback && self.onLoadedCallback(self.arrayData);
-        }
-          
-      }
-    },
-    //心跳
-    websockHeartbeat() {
-      const self = this;
-      // ws在建立连接后，需要5s之内给ws clint 发送一次心跳，否则2次之后会关闭
-      self.websockTime = setInterval(function() {
-        self.websockSend(JSON.stringify({ ping: new Date().getTime() }));
-      }, 3000);
-    },
-    //连接关闭
-    websockClose() {
-      // console.log("socket已经关闭");
-      clearInterval(this.websockTime);
-      this.isWebsock = false;
-    },
+      // const reader = new FileReader();
+      // const self = this;
+      // reader.readAsArrayBuffer(msg.data, 'utf-8');
+      // reader.onload = function() {
+      //   let ploydata = new Uint8Array(reader.result);
+      //   let res = JSON.parse(pako.inflate(ploydata, {to: 'string'}));
+      //   if (res && res.tick) {
+      //     const { ts, tick: { close = 0, open = 0, high = 0, low = 0, vol = 0 } } = res;
+      //     self.arrayData.push({
+      //       time: Number(ts),
+      //       close: Number(close),
+      //       open: Number(open),
+      //       high: Number(high),
+      //       low: Number(low),
+      //       volume: Number(vol),
+      //     });
+
+      //     // TODO：容错重复调用删除了
+      //     self.onLoadedCallback && self.onLoadedCallback(self.arrayData);
+      //   }
+
+    }
+  },
+  //心跳
+  websockHeartbeat() {
+    const self = this;
+    // ws在建立连接后，需要5s之内给ws clint 发送一次心跳，否则2次之后会关闭
+    self.websockTime = setInterval(function () {
+      self.websockSend(JSON.stringify({ ping: new Date().getTime() }));
+    }, 3000);
+  },
+  //连接关闭
+  websockClose() {
+    // console.log("socket已经关闭");
+    clearInterval(this.websockTime);
+    this.isWebsock = false;
   },
 };

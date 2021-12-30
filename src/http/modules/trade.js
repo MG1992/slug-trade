@@ -1,6 +1,13 @@
 
 import $http from '../index'
 
+export function getKlineList() {
+    return $http({
+        url: '/trade/kline/list',
+        method: 'get'
+    })
+}
+
 // 获取用户数据 可用余额
 export function getAccounts() {
     return $http({
