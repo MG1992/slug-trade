@@ -8,6 +8,13 @@ export function getKlineList() {
     })
 }
 
+export function getKlineNode() {
+    return $http({
+        url: '/trade/kline/node',
+        method: 'get'
+    })
+}
+
 // 获取用户数据 可用余额
 export function getAccounts() {
     return $http({

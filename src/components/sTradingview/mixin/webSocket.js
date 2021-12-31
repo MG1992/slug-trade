@@ -1,6 +1,6 @@
 import pako from 'pako'
 import { find } from 'lodash';
-import { getKlineList } from "@/http/modules/trade";
+import { getKlineList, getKlineNode } from "@/http/modules/trade";
 
 export const webSocketMixin = {
   data() {
@@ -19,23 +19,43 @@ export const webSocketMixin = {
     webSocket(e) {
       const self = this;
       if (e == "load") {
-        if (typeof WebSocket === "undefined") {
-          alert("您的浏览器不支持socket");
-        } else {
-          try {
-            self.websock.close();
-            this.isWebsock = false;
-          } catch (e) { }
-          // 实例化socket
-          self.websock = new WebSocket(self.wsUrl);
-          // 监听socket连接
-          self.websock.onopen = self.websockOpen;
-          // 监听socket错误信息
-          self.websock.onerror = self.websockError;
-          // 监听socket消息
-          self.websock.onmessage = self.websockMessage;
-        }
+        // if (typeof WebSocket === "undefined") {
+        //   alert("您的浏览器不支持socket");
+        // } else {
+        //   try {
+        //     self.websock.close();
+        //     this.isWebsock = false;
+        //   } catch (e) { }
+        //   // 实例化socket
+        //   self.websock = new WebSocket(self.wsUrl);
+        //   // 监听socket连接
+        //   self.websock.onopen = self.websockOpen;
+        //   // 监听socket错误信息
+        //   self.websock.onerror = self.websockError;
+        //   // 监听socket消息
+        //   self.websock.onmessage = self.websockMessage;
+        // }
+        self.getFirstKlineList();
+
+        setInterval(() => {
+          self.getKlineListNode()
+        }, 1000);
       }
+    },
+    getFirstKlineList() {
+      const self = this;
+      getKlineList().then(res => {
+        self.arrayData = res;
+        self.onLoadedCallback && self.onLoadedCallback(res);
+      });
+    },
+
+    getKlineListNode() {
+      const self = this;
+      getKlineNode().then(res => {
+        self.arrayData.push(res);
+        self.onLoadedCallback && self.onLoadedCallback(self.arrayData)
+      });
     },
     //链接状态
     websockOpen(e) {
@@ -76,7 +96,6 @@ export const webSocketMixin = {
     //监听返回消息
     websockMessage(msg) {
       const self = this;
-      let setInt = null;
       getKlineList().then(res => {
         self.arrayData = [...self.arrayData, ...res];
         self.onLoadedCallback && self.onLoadedCallback(self.arrayData)
