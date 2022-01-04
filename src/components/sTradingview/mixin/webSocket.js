@@ -38,7 +38,7 @@ export const webSocketMixin = {
         self.getFirstKlineList();
 
         setInterval(() => {
-          self.getKlineListNode()
+          self.getKlineListNode();
         }, 1000);
       }
     },

@@ -16,7 +16,7 @@ Mock.mock('/trade/kline/list', 'get', {
   "msg": "成功",
   "status": 1,
   "data|60": [{
-    "time": new Date().getTime(),
+    "time|+1": new Date().getTime(),
     "close": "@random(0, 100)",
     "open": "@random(0, 100)",
     "high": "@random(50, 100)",
@@ -28,8 +28,8 @@ Mock.mock('/trade/kline/list', 'get', {
 Mock.mock('/trade/kline/node', 'get', {
   "msg": "成功",
   "status": 1,
-  "data|60": {
-    "time": new Date().getTime(),
+  "data": {
+    "time|+1": new Date().getTime(),
     "close": "@random(0, 100)",
     "open": "@random(0, 100)",
     "high": "@random(50, 100)",
