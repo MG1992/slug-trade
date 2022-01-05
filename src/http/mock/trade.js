@@ -29,7 +29,7 @@ Mock.mock('/trade/kline/node', 'get', {
   "msg": "成功",
   "status": 1,
   "data": {
-    "time|+1": new Date().getTime(),
+    "time|+1": new Date().getTime() + 1000,
     "close": "@random(0, 100)",
     "open": "@random(0, 100)",
     "high": "@random(50, 100)",

@@ -298,17 +298,11 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-// /deep/ .van-tabs--line .van-tabs__wrap {
-//   height: 100%;
-// }
 .sTradingviewContent {
   height: 100%;
   width: 100%;
-  .tabsWrap {
-    height: 88px;
-  }
   .sTradingviewView {
-    height: calc(100% - 88px);
+    height: calc(100% - 46px);
   }
 }
 </style>

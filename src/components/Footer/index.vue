@@ -3,7 +3,6 @@
     v-if="
       $route.path === '/' ||
       $route.name === 'Market' ||
-      $route.name === 'TradeView' ||
       $route.name === 'Wallet' ||
       $route.name === 'Mine'
     "
@@ -75,6 +74,8 @@ export default {
         inactive: require("@/assets/icons/index_icon1.svg"),
         active1: require("@/assets/icons/index_icon2_active.svg"),
         inactive1: require("@/assets/icons/index_icon2.svg"),
+        active2: require("@/assets/icons/index_icon3_active.svg"),
+        inactive2: require("@/assets/icons/index_icon3.svg"),
         active3: require("@/assets/icons/index_icon4_active.svg"),
         inactive3: require("@/assets/icons/index_icon4.svg"),
         active4: require("@/assets/icons/index_icon5_active.svg"),
