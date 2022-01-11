@@ -445,6 +445,10 @@
       "publishTime": "发行时间",
       "publishQuantity": "品牌",
       "circulateQuantity": "厚度",
+      "material": "材质",
+      "package": "封装",
+      "circulation": "流通量",
+      "circulationMarketValue": "流通市值",
       "crowdfundingPrice": "产地",
       "whiteBook": "简称",
       "officialWebsite": "货源",
@@ -456,6 +460,7 @@
       "more": "更多",
       "deepDraw": "深度图",
       "remind": "提醒",
+      "collect": "自选",
       "notOpen": "暂未开放"
     }
   },

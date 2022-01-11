@@ -3,14 +3,14 @@
     <div ref="main" class="main-wrapper">
       <div class="kline-header-wrapper">
         <van-row>
-          <van-col span="12">
+          <van-col span="18">
             <van-icon :name="iconBack" @click="onClose" />
             <span style="display: inline-block; margin: 0 10px">|</span>
             <van-icon :name="iconLines" />
-            <span>{{ ticker.dspName }}</span>
+            <!-- <span>{{ ticker.dspName }}</span> -->
+            <span>CL03A105MQ3CSNC</span>
           </van-col>
-          <van-col span="12" class="text-right">
-            <van-icon :name="iconCollect" @click="willComing" />
+          <van-col span="6" class="text-right">
             <van-icon :name="iconWhole" @click="willComing" />
             <van-icon :name="iconShare" @click="willComing" />
           </van-col>
@@ -31,6 +31,10 @@
             </span>
             <span :class="upOrDown"> {{ percent }}%</span>
           </div> -->
+          <div style="font-size: 18px; line-height: 35px">
+            <span class="color-gray"> ≈ </span>
+            <span class="down"> 5.32%</span>
+          </div>
         </van-col>
         <van-col span="12" class="text-right statistic-datas">
           <van-row>
@@ -102,19 +106,19 @@
     </van-tabs>
     <div v-if="activeName === 'orders'" class="orders-wrapper">
       <van-row class="order-header">
-        <van-col span="2">
+        <van-col span="3" class="text-center">
           {{ $t("trade.kline.buyOrder") }}
         </van-col>
-        <van-col span="6">
+        <van-col span="5">
           {{ $t("trade.kline.quantity") }}({{ ticker.baseCurrencyName }})
         </van-col>
         <van-col span="8" class="text-center">
           {{ $t("trade.kline.price") }}(元)
         </van-col>
-        <van-col span="6" class="text-right">
+        <van-col span="5" class="text-right">
           {{ $t("trade.kline.quantity") }}({{ ticker.baseCurrencyName }})
         </van-col>
-        <van-col span="2" class="text-right">
+        <van-col span="3" class="text-center">
           {{ $t("trade.kline.sellOrder") }}
         </van-col>
       </van-row>
@@ -132,11 +136,11 @@
             gutter="10"
           >
             <div v-if="index < 20">
-              <van-col span="4" class="text-right" style="color: #c0bfd6">
+              <van-col span="6" class="text-center" style="color: #c0bfd6">
                 {{ index + 1 }}
               </van-col>
-              <van-col span="8" style="color: #fff"> {{ dep[1] }} </van-col>
-              <van-col span="12" class="text-right">
+              <van-col span="10" style="color: #fff"> {{ dep[1] }} </van-col>
+              <van-col span="8" class="text-right">
                 {{ dep[0] }}
               </van-col>
             </div>
@@ -150,11 +154,11 @@
             gutter="10"
           >
             <div v-if="index < 20">
-              <van-col span="12"> {{ dep[0] }} </van-col>
-              <van-col span="8" class="text-right" style="color: #fff">
+              <van-col span="8"> {{ dep[0] }} </van-col>
+              <van-col span="10" class="text-right" style="color: #fff">
                 {{ dep[1] }}
               </van-col>
-              <van-col span="4" style="color: #c0bfd6">
+              <van-col span="6" class="text-center" style="color: #c0bfd6">
                 {{ index + 1 }}
               </van-col>
             </div>
@@ -218,27 +222,31 @@
         <van-col span="12" class="gray">{{
           $t("trade.kline.publishTime")
         }}</van-col>
-        <van-col span="12">{{ intros.publish_time || "-" }}</van-col>
+        <van-col span="12">{{ intros.publishTime || "-" }}</van-col>
         <van-col span="12" class="gray">{{
           $t("trade.kline.publishQuantity")
         }}</van-col>
-        <van-col span="12">{{ intros.publish_num || "-" }}</van-col>
+        <van-col span="12">{{ intros.publishQuantity || "-" }}</van-col>
         <van-col span="12" class="gray">{{
           $t("trade.kline.circulateQuantity")
         }}</van-col>
-        <van-col span="12">{{ intros.circulate_num || "-" }}</van-col>
+        <van-col span="12">{{ intros.circulateQuantity || "-" }}</van-col>
         <van-col span="12" class="gray">{{
-          $t("trade.kline.crowdfundingPrice")
+          $t("trade.kline.material")
         }}</van-col>
-        <van-col span="12">{{ intros.crowdfunding_price || "-" }}</van-col>
+        <van-col span="12">{{ intros.material || "-" }}</van-col>
         <van-col span="12" class="gray">{{
-          $t("trade.kline.whiteBook")
+          $t("trade.kline.package")
         }}</van-col>
-        <van-col span="12">{{ intros.white_paper || "-" }}</van-col>
+        <van-col span="12">{{ intros.package || "-" }}</van-col>
         <van-col span="12" class="gray">{{
-          $t("trade.kline.officialWebsite")
+          $t("trade.kline.circulation")
         }}</van-col>
-        <van-col span="12">{{ intros.official_website || "-" }}</van-col>
+        <van-col span="12">{{ intros.circulation || "-" }}</van-col>
+        <van-col span="12" class="gray">{{
+          $t("trade.kline.circulationMarketValue")
+        }}</van-col>
+        <van-col span="12">{{ intros.circulationMarketValue || "-" }}</van-col>
       </van-row>
       <!-- <div class="title" style="margin-top: 20px">
         {{ $t("trade.kline.synopsis") }}
@@ -247,14 +255,14 @@
     </div>
     <div v-else class="btns" ref="btns">
       <van-row>
-        <van-col span="10">
+        <van-col span="8">
           <div
             class="btn bg-up"
             @click="toTrade('buy')"
             v-text="$t('trade.kline.buy')"
           ></div>
         </van-col>
-        <van-col span="10">
+        <van-col span="8">
           <div
             class="btn bg-down"
             @click="toTrade('sell')"
@@ -264,6 +272,10 @@
         <van-col class="notice-bell" span="4" @click="willComing">
           <van-icon size="20" :name="iconBell" />
           <p class="color-gray">{{ $t("trade.kline.remind") }}</p>
+        </van-col>
+        <van-col class="notice-bell" span="4" @click="willComing">
+          <van-icon size="20" :name="iconCollect" />
+          <p class="color-gray">{{ $t("trade.kline.collect") }}</p>
         </van-col>
       </van-row>
     </div>
@@ -300,55 +312,68 @@ export default {
       wsUrl: "wss://api.huobipro.com/ws",
 
       ticker: {
-        close: 35,
-        high: 50,
-        low: 30,
-        volume: "36000个",
-        pricePrecision: 2,
-        baseCurrencyName: "个",
+        close: 4.9,
+        high: 5.1,
+        low: 4.1,
+        volume: "60000K",
+        pricePrecision: 3,
+        baseCurrencyName: "KPCS",
       },
       depth: {
         asks: [
-          [35, 30],
-          [28, 36],
-          [35, 30],
-          [28, 36],
-          [35, 30],
-          [28, 36],
-          [35, 30],
-          [28, 36],
-          [35, 30],
-          [28, 36],
-          [35, 30],
-          [28, 36],
-          [35, 30],
-          [28, 36],
+          [4.9, 10],
+          [4.9, 100],
+          [5.0, 50],
+          [5.1, 600],
+          [5.1, 600],
+          [5.0, 60],
+          [4.9, 6000],
+          [4.8, 6000],
+          [4.7, 12000],
+          [4.6, 24000],
+          [4.5, 100],
+          [4.5, 50],
+          [4.4, 600],
+          [4.3, 600],
+          [4.4, 6000],
+          [4.3, 6000],
+          [4.2, 12000],
+          [4.1, 100],
+          [4.1, 200],
+          [4.1, 600],
         ],
         bids: [
-          [35, 30],
-          [28, 36],
-          [35, 30],
-          [28, 36],
-          [35, 30],
-          [28, 36],
-          [35, 30],
-          [28, 36],
-          [35, 30],
-          [28, 36],
-          [35, 30],
-          [28, 36],
-          [35, 30],
-          [28, 36],
+          [4.9, 10],
+          [4.9, 100],
+          [5.0, 50],
+          [5.1, 600],
+          [5.1, 600],
+          [5.0, 60],
+          [4.9, 6000],
+          [4.8, 6000],
+          [4.7, 12000],
+          [4.6, 24000],
+          [4.5, 100],
+          [4.5, 50],
+          [4.4, 600],
+          [4.3, 600],
+          [4.4, 6000],
+          [4.3, 6000],
+          [4.2, 12000],
+          [4.1, 100],
+          [4.1, 200],
+          [4.1, 600],
         ],
       },
       intros: {
         currency: "CL03A105MQ3CSNC",
-        publish_time: 2021,
-        publish_num: "三星",
-        circulate_num: "0.3T",
-        crowdfunding_price: "天津",
-        white_paper: "0201-105M-6.3V",
-        official_website: "爱芯微电子",
+        publishTime: 2021,
+        publishQuantity: "三星",
+        circulateQuantity: "0.3T",
+        material: "X5R",
+        package: "10,000PCS",
+        circulation: "180,000,000PCS",
+        circulationMarketValue: "882,000",
       },
       loading: true,
       // 委托订单栏激活选项
@@ -390,7 +415,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .tradingviewView {
-  height: 100vh;
+  height: 50vh;
   width: 100vw;
 }
 
@@ -621,12 +646,14 @@ export default {
 }
 .buyer-wrapper {
   color: #35efcd;
+  font-size: 14px;
   .van-col {
     line-height: 18px;
   }
 }
 .seller-wrapper {
   color: #f56161;
+  font-size: 14px;
   .van-col {
     line-height: 18px;
   }
@@ -654,6 +681,7 @@ export default {
     font-size: 20px;
     font-weight: bold;
     line-height: 50px;
+    border-bottom: 1px solid #000;
   }
   .van-row {
     .gray {
@@ -661,6 +689,8 @@ export default {
     }
     .van-col {
       padding: 5px 0;
+      line-height: 1rem;
+      border-bottom: 1px solid #000;
     }
   }
   .intros-summary {

@@ -22,7 +22,7 @@
       </p>
     </header>
 
-    <van-tabs @click="switchTab" v-model="activeTab">
+    <van-tabs v-model="activeTab">
       <van-tab title="可用" name="tab_1"></van-tab>
       <van-tab title="交易" name="tab_2"></van-tab>
       <van-tab title="划转" name="tab_3"></van-tab>
@@ -75,11 +75,7 @@
     <van-divider hairline :style="{ margin: 0, color: '#F4F4F4' }" />
     <!-- 币列表 -->
     <section v-if="activeTab == 'tab_1'" class="coin-list">
-      <div
-        class="coin-item"
-        v-for="(account, index) in filterAccounts"
-        :key="index"
-      >
+      <div class="coin-item" v-for="(account, index) in accounts" :key="index">
         <div class="coin-title">
           <i>
             <img :src="account.currencyImg" />
@@ -91,10 +87,7 @@
           <div class="label-row">
             <van-row type="flex" justify="flex-start">
               <van-col span="8">{{ $t("wallet.wallet.haveCurrency") }}</van-col>
-              <van-col span="8"></van-col>
-              <!-- <van-col span="8">{{$t('wallet.wallet.canUse')}}</van-col>
-              <van-col span="8">{{$t('wallet.wallet.tarding')}}</van-col>
-              <van-col span="8">≈CNY</van-col>-->
+              <van-col span="8">单价</van-col>
             </van-row>
           </div>
           <div class="num-row">
@@ -102,7 +95,9 @@
               <van-col span="8">
                 {{ $n(account.available_balance, "maximumSignificantDigits4") }}
               </van-col>
-              <van-col span="8"></van-col>
+              <van-col span="8">{{
+                $n(account.price, "maximumSignificantDigits4")
+              }}</van-col>
             </van-row>
           </div>
         </div>
@@ -130,11 +125,7 @@
 
     <!-- 交易tab -->
     <section v-if="activeTab == 'tab_2'" class="coin-list">
-      <div
-        class="coin-item"
-        v-for="(account, index) in filterAccounts"
-        :key="index"
-      >
+      <div class="coin-item" v-for="(account, index) in accounts" :key="index">
         <div class="coin-title">
           <i>
             <img :src="account.currencyImg" />
@@ -184,6 +175,7 @@ import {
 import eyeIcon from "@/assets/icons/eye_icon.svg";
 import closeEyeIcon from "@/assets/icons/hidden_icon.svg";
 import timeIcon from "@/assets/icons/time_icon.svg";
+import { getWalletList } from "@/http/modules/wallet";
 
 import BigNumber from "bignumber.js";
 
@@ -222,41 +214,12 @@ export default {
     eyesIconSrc() {
       return this.isOpenEyes ? closeEyeIcon : eyeIcon;
     },
-    filterAccounts() {
-      var ret = [];
-      for (var i in this.currencys) {
-        var currency = this.currencys[i].currency;
-        var currencyImg = this.currencys[i].currency_img;
-
-        var accounts = this.accounts.filter(function (value) {
-          return value.currency == currency;
-        });
-        var account =
-          accounts.length > 0
-            ? accounts[0]
-            : {
-                currencyImg: currencyImg,
-                currency: currency,
-                available_balance: 0,
-                frozen_balance: 0,
-                total_balance: 0,
-              };
-        var searchText = this.searchText.toLowerCase();
-        if (
-          (this.isHideZeroAsset && account.total_balance <= 0) ||
-          currency.toLowerCase().indexOf(searchText) == -1
-        ) {
-          continue;
-        }
-        account.precision = this.currencys[i].c_precision;
-        account.currencyImg = currencyImg;
-        ret.push(account);
-      }
-      if (this.isHideZeroAsset) {
-        ret = ret.filter((item) => item.total_balance > 0);
-      }
-      return ret;
-    },
+  },
+  mounted() {
+    getWalletList().then((res) => {
+      console.log(res);
+      this.accounts = res;
+    });
   },
   methods: {
     toTradeNow() {
@@ -397,9 +360,8 @@ section {
     height: 47px;
     i {
       display: inline-block;
-      width: 22px;
+      width: 50px;
       height: 22px;
-      border-radius: 50%;
       overflow: hidden;
       img {
         width: 100%;

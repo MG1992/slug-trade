@@ -5,9 +5,68 @@
 import Mock from 'mockjs'
 
 const { Random } = Mock;
+let tab_price = 4.1;
+let high_price = 4.1, low_price = 4.1, close_price = 4.1, open_price = 4.1;
 
 Random.extend({
-  random: function (min, max) {
+  // trade: function () {
+  //   let upOrdown = ((Math.random() * 2) - 1) * 5 / 100;
+  //   let price = tab_price * (1 + upOrdown);
+  //   open_price = price;
+  //   if (price > high_price) {
+  //     high_price = price;
+  //   }
+  //   if (price < low_price) {
+  //     low_price = price;
+  //   }
+  //   return open_price;
+  // },
+  tradeOpen: function () {
+    let upOrdown = ((Math.random() * 2) - 1) * 5 / 100;
+    let price = tab_price * (1 + upOrdown);
+    open_price = price;
+    if (price > high_price) {
+      high_price = price;
+    }
+    if (price < low_price) {
+      low_price = price;
+    }
+    return open_price;
+  },
+  tradeClose: function () {
+    let upOrdown = ((Math.random() * 2) - 1) * 5 / 100;
+    let price = tab_price * (1 + upOrdown);
+    close_price = price;
+    if (price > high_price) {
+      high_price = price;
+    }
+    if (price < low_price) {
+      low_price = price;
+    }
+    return close_price;
+  },
+  tradeHigh: function () {
+    let upOrdown = Math.random() * 5 / 100;
+    let price = tab_price * (1 + upOrdown);
+    if (price > high_price) {
+      high_price = price;
+    }
+    return high_price;
+  },
+  tradeLow: function () {
+    let upOrdown = (Math.random() - 1) * 5 / 100;
+    let price = tab_price * (1 + upOrdown);
+    if (price < low_price) {
+      low_price = price;
+    }
+    return low_price;
+  },
+  volume: function (min, max) {
+    let price = close_price;
+    high_price = price;
+    low_price = price;
+    open_price = price;
+    tab_price = close_price;
     return Random.float(min, max, 1, 2);
   }
 })
@@ -17,11 +76,11 @@ Mock.mock('/trade/kline/list', 'get', {
   "status": 1,
   "data|60": [{
     "time|+1": new Date().getTime(),
-    "close": "@random(0, 100)",
-    "open": "@random(0, 100)",
-    "high": "@random(50, 100)",
-    "low": "@random(0, 50)",
-    "volume": "@random(0, 100)",
+    "open": "@tradeOpen()",
+    "close": "@tradeClose()",
+    "high": "@tradeHigh()",
+    "low": "@tradeLow()",
+    "volume": "@volume(0, 100)",
   }]
 });
 
@@ -30,11 +89,11 @@ Mock.mock('/trade/kline/node', 'get', {
   "status": 1,
   "data": {
     "time|+1": new Date().getTime() + 1000,
-    "close": "@random(0, 100)",
-    "open": "@random(0, 100)",
-    "high": "@random(50, 100)",
-    "low": "@random(0, 50)",
-    "volume": "@random(0, 100)",
+    "open": "@tradeOpen()",
+    "close": "@tradeClose()",
+    "high": "@tradeHigh()",
+    "low": "@tradeLow()",
+    "volume": "@volume(0, 100)",
   }
 });
 

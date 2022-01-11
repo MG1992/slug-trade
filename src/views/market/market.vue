@@ -64,7 +64,7 @@
         <div class="left">
           <p class="currency">
             {{ item.base_currency }}
-            <span class="currency-tips"> /{{ item.id }} </span>
+            <span class="currency-tips"> {{ item.id }} </span>
           </p>
           <p class="tips">
             {{ $t("market.24time") }}

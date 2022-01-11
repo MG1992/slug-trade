@@ -205,7 +205,8 @@
             @click="SET_STATE_STR(['price', value[0] ? value[0] : 0])"
           >
             <div class="line-left">
-              {{ value[0] ? value[0].toFixed(ticker.pricePrecision) : "--" }}
+              <!-- {{ value[0] ? value[0].toFixed(ticker.pricePrecision) : "--" }} -->
+              {{ value[0] }}
             </div>
             <div class="line-right">{{ value[1] || "--" }}</div>
             <div class="line-bg" :style="bgStyle(value[1], 'asks')"></div>
@@ -228,7 +229,8 @@
             @click="SET_STATE_STR(['price', value[0] ? value[0] : 0])"
           >
             <div class="line-left">
-              {{ value[0] ? value[0].toFixed(ticker.pricePrecision) : "--" }}
+              <!-- {{ value[0] ? value[0].toFixed(ticker.pricePrecision) : "--" }} -->
+              {{ value[0] }}
             </div>
             <div class="line-right">{{ value[1] || "--" }}</div>
             <div class="line-bg" :style="bgStyle(value[1], 'bids')"></div>
@@ -736,7 +738,13 @@ export default {
         }
         return arr.reverse();
       }
-      return [[], [], [], [], []];
+      return [
+        [4.6, 600],
+        [4.5, 1200],
+        [4.4, 60000],
+        [4.3, 60],
+        [4.2, 2400],
+      ];
     },
     getDepthBids() {
       let asks_bids = this.depth.bids;
@@ -751,7 +759,13 @@ export default {
         }
         return arr;
       }
-      return [[], [], [], [], []];
+      return [
+        [4.1, 600],
+        [4.2, 1200],
+        [4.3, 60000],
+        [4.4, 60],
+        [4.5, 2400],
+      ];
     },
   },
   methods: {

@@ -1,13 +1,11 @@
-/*
- * @Author: 唐嘉伟
- * @Date: 2020-09-15 16:57:38
- * @LastEditors: joevin
- * @LastEditTime: 2020-09-28 16:40:17
- * @FilePath: \html\src\http\modules\wallet.js
- * @Desc: 描述
- */
 import $http from '../index'
 
+export function getWalletList() {
+  return $http({
+    url: '/wallet/list',
+    method: 'get',
+  })
+}
 // 查询充值记录
 export function queryDepositRecords(params) {
   return $http({
